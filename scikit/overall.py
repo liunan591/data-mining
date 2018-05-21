@@ -75,9 +75,12 @@ print("The pipeline scored an average accuracy for is {0:.1f}%".format(np.mean(t
 #%% read data
 import pandas as pd
 dataset = pd.read_csv(data_filename)
+all_ratings = pd.read_csv(ratings_filename, delimiter="\t", header=None, names = ["UserID", "MovieID", "Rating", "Datetime"])
 dataset = pd.read_csv(data_filename, parse_dates=["Date"], skiprows=[0,])#跳过标题后的第一行
+all_ratings["Datetime"] = pd.to_datetime(all_ratings['Datetime'], unit='s')
 dataset.columns = ["Date", "Score Type", "Visitor Team", "VisitorPts", "Home Team", "HomePts", "OT?", "Notes"]
 dataset["HomeWin"] = dataset["VisitorPts"] < dataset["HomePts"]
+adult["Work-Class"].unique()
 y_true = dataset["HomeWin"].values
 
 
