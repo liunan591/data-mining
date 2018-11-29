@@ -47,6 +47,17 @@ df["列名"].max()  #min,average
 df.sort_values("列名", inplace = True)    #替换原有列，从小到大
 df.sort_values("列名", inplace = True, ascending = False)    #替换原有列，从大到小
 
+#列编辑
+df['four']=df['one']+df['three']    #通过列的对应计算增加新列
+del df['one']   #通过删除索引删除列
+df.pop('two')   #通过出栈删除列
+
+#行编辑
+df.loc['b'] #通过行标签查看行
+df.iloc[2]  #通过行索引查看行
+df = df.append(df2) #增加行
+df = df.drop(0) #删除索引为0的行
+
 #%%3.数据探索
 
 #查找空值及处理
