@@ -51,12 +51,20 @@ df.sort_values("列名", inplace = True, ascending = False)    #替换原有列�
 df['four']=df['one']+df['three']    #通过列的对应计算增加新列
 del df['one']   #通过删除索引删除列
 df.pop('two')   #通过出栈删除列
-
+df.pipe(func,arg2)  #以df中的每一个元素依次为输入，与第二个后边传入的参数进行功能为func的计算
+df.apply(func)  #按行或者列执行某个函数
+df['col1'].map(lambda x:x*100)
+df.applymap(lambda x:x*100)
 #行编辑
 df.loc['b'] #通过行标签查看行
 df.iloc[2]  #通过行索引查看行
 df = df.append(df2) #增加行
 df = df.drop(0) #删除索引为0的行
+
+#要遍历数据帧(DataFrame)中的行，可以使用以下函数 -
+    # iteritems() - 迭代(key，value)对
+    # iterrows() - 将行迭代为(索引，系列)对
+    # itertuples() - 以namedtuples的形式迭代行
 
 #%%3.数据探索
 
