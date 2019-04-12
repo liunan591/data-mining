@@ -49,6 +49,11 @@ def plot(x,y,save_file = None):
     """
 
 
+colors = ['r' if l == 0 else 'b' for l in Y[:]]
+plt.scatter(X[:,0], X[:,1], c=colors)
+plt.xlabel("Scaled age (in yrs)")
+plt.ylabel("Tumor size (in cm)")
+plt.show()
 #%%绘制条形图
 def
 fig3, axes = plt.subplots(nrows=2,ncols=2)
