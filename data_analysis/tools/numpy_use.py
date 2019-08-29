@@ -14,10 +14,18 @@ np.random.random((3,2))            #by random and shpae
 np.empty((2,3,4))                  #by random and shpae
 np.arange(15)                      #by list [0-15] not include 15
 #change dtype
+#int8\int16\int32\int64     整数
+#uint8\uint16\uint31\uint64     无符号整型
+#float16\float32\float64\float128 浮点数
+#complex64\complex128\complex256 分别为两个32、64、128位浮点数表示的复数
+#bool 布尔值
 #dtype include intxx floatxx
+np.inf  #无穷大
+np.nan  #非数字类型 两个nan是不相等的，nan与任何值计算都为nan
 int_arr = np.array([1,2,3,4,5])
 float_arr = int_arr.astype(np.float64)
 int_arr.astype(dtype=float_arr.dtype)
+np.round np.around  #四舍五入
 #使用astype将float转换为int时小数部分被舍弃
  
 #get element
@@ -49,8 +57,9 @@ print(np.mean(x, axis=0))
 print(x.T,'\n', x.transpose())
 arr = np.arange(16).reshape(2,2,4)
 print(arr.swapaxes(1,2),'\n',arr.transpose((0,2,1)))
+
 print(arr.ravel())      #reshape to list
- 
+print(arr.flatten())    #reshape to list
 """当操作两个array时，numpy会逐个比较它们的shape，
 在下述情况下，两arrays会兼容和输出broadcasting结果：
     1.相等
@@ -63,9 +72,10 @@ print(v+w)
 x_arr = np.array([1.1, 1.2, 1.3, 1.4, 1.5])
 y_arr = np.array([2.1, 2.2, 2.3, 2.4, 2.5])
 cond = np.array([True, False, True, True, False])
-print(np.where(cond, x_arr, y_arr))
+print(np.where(cond, x_arr, y_arr)) #根据条件赋值
 print(np.where(x_arr > 1.3, 1,-1))
 print(np.where(x_arr > 1.3, 1,x_arr))
+print(x_arr.clip(1.2,1.4))  #设定数组的上下限，若不满足，则变为上下线
  
 #connect two matrix
 arr1 = np.array([[1, 2, 3], [4, 5, 6]])
