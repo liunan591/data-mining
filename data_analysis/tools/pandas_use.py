@@ -34,6 +34,7 @@ df.shape    #行数、列数
 #重新设置index : df.reindex(list("abcedf"))
 #指定某一列作为index ：df.set_index("Country",drop=False) 可以传入数组，设定复合索引
 #返回index的唯一值：df.set_index("Country").index.unique()
+#交换复合index的位置：df.swaplevel()
 
 #查看对象中的元素
 df.columns #返回列名称列表，.tolist()可以将结果转化为list
@@ -108,9 +109,37 @@ pandas.isnull(df)
 grouped = df.groupby(by="columns_name")
 grouped = df.groupby(by=["Country","State/Province"])
 grouped = df["Country"].groupby(by=[df["Country"],df["State/Province"]])
+grouped.count() #分组中非na值的数量
+#sum mean median非na值的统计 std无偏标准差，分母为n-1，var方差 min max
+grouped.agg(func)   #对每一个分类的每一列进行一次func计算
 #grouped是一个DataFrameGroupBy对象，是可迭代的
 #grouped中的每一个元素是一个元组
 #元组里面是（索引(分组的值)，分组之后的DataFrame）
 
 #分类处理
 df.pivot_table(index,values,aggfunc)
+
+#%%时间序列
+import pandas as pd
+#生成时间序列
+#pd.date_range(start=None, end=None, periods=None, freq='D')
+#start、end、periods生成periods个等间距的时间
+#start、end、freq生成freq间隔的时间序列
+pd.date_range("2019-08-10 8:00:00","20190830",periods=5) #等分五段
+#D日 B工作日 H小时 T/min分 S秒 L/ms毫秒 U微秒 M每月最后一天 BM每月最后一个工作日
+#MS每月第一天 BMS每月第一个工作日 W每周周日 
+pd.date_range("2019-08-10","20190830",freq="2W") #时间段内的所有周日，每两个取一个
+
+#时间序列转化
+index = index=pd.date_range("20190810","20190830",periods=10)
+df = pd.DataFrame(list(range(10)),index=index)
+df.resample("5D") #等同于group
+
+
+
+
+
+
+
+
+

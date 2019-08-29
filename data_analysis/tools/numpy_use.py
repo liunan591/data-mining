@@ -27,6 +27,8 @@ float_arr = int_arr.astype(np.float64)
 int_arr.astype(dtype=float_arr.dtype)
 np.round np.around  #四舍五入
 #使用astype将float转换为int时小数部分被舍弃
+
+#random随机
  
 #get element
 print (ar[1,2])     #get the element in Second row, third column
