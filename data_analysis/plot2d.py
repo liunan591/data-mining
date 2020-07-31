@@ -55,7 +55,6 @@ plt.xlabel("Scaled age (in yrs)")
 plt.ylabel("Tumor size (in cm)")
 plt.show()
 #%%绘制条形图
-def
 fig3, axes = plt.subplots(nrows=2,ncols=2)
 
 
