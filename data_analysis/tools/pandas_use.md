@@ -94,6 +94,7 @@ df.reindex(labels=None, index=None, columns=None, axis=None, method=None, copy=T
 
 
 df.swaplevel()  #交换复合index的位置
+df.reorder_levels
 df.droplevel('a') # 删除复合索引中的 a 列索引
 df.droplevel('level2', axis=1) # 删除复合列名中的 level2 列名索引
 ```
@@ -127,13 +128,25 @@ Out[313]: Index(['a', 'b', 'd', 'e'], dtype='object')
 ```python
 df.sort_values("列名", inplace = True)    #替换原有列，从小到大
 df.sort_values("列名", inplace = True, ascending = False)    #替换原有列，从大到小
+
+# index sort
+s.sort_index(level=0)
+s.index.set_names(['L1', 'L2'], inplace=True)
+s.sort_index(level='L1')
 ```
 
 ### merge
 
 ```python
+# 合并两个df
+pd.concat(objs, axis=0, join='outer', ignore_index=False, keys=None,
+          levels=None, names=None, verify_integrity=False, copy=True)
+result = df1.append(df2)
+result = df1.append([df2, df3])
+
 # 按行索引合并信息 -> 'DataFrame'   
-df.join(other, on=None, how='left', lsuffix='', rsuffix='', sort=False)  
+df.join(other, on=None, how='left', lsuffix='', rsuffix='', sort=False) 
+# 按指定列合并信息
 df.merge(right, how='inner', on=None, left_on=None, right_on=None, 
          left_index=False, right_index=False, sort=False, suffixes=('_x', '_y'), 
          copy=True, indicator=False, validate=None)
@@ -152,8 +165,9 @@ df.loc["w",["A","B"]] #取索引为w行的A、B列 名称索引 的 df对象
 
 # 灵活查看多重索引的
 In [56]: idx = pd.IndexSlice
-In [57]: dfmi.loc[idx[:, :, ['C1', 'C3']], idx[:, 'foo']]
-In [58]: dfmi.loc['A1', (slice(None), 'foo')]
+In [57]: dfmi.loc[idx[:, :, ['C1', 'C3']], idx[:, 'foo']] # 取多行多列
+In [58]: dfmi.loc['A1', (slice(None), 'foo')] # 取特定单元格
+In [59]: df.loc[('baz', 'two'):('qux', 'one')] # 取范围内的行
 
 dflookup.lookup(list(range(0, 10, 2)), ['B', 'C', 'A', 'B', 'D']) # 取指定行列数据的数组
 df["列名"]    #根据列名定位列，中括号里边可以传list
@@ -227,7 +241,7 @@ dfmi['one']['second']
 在数据直接更改时，建议用loc方案
 
 
-    
+​    
 
 ### group
 
